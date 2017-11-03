@@ -253,3 +253,20 @@ class device:
         locationChannelB = int((((locationChannelB/RANGE)*(MAX_LIMIT-MIN_LIMIT))+MIN_LIMIT)/STEP_SIZE)
         self.pwm_updateCompare(locationChannelA, locationChannelB)
 
+    def ws2812_write(self, pin, r, g, b):
+        self.lw.ctrl_transfer(bmRequestType=0xC0, bRequest=54,
+                              wValue=int((g<<8) | pin | 0x30), wIndex=int(b<<8),
+                              data_or_wLength=8, timeout=USB_TIMEOUT)
+	#lwStatus=usb_control_msg(lwHandle, 0xC0, 54, (g<<8) | pin | 0x30, (b<<8) | r, rxBuffer, 8, USB_TIMEOUT);
+    
+    def ws2812_flush(self, pin):
+        self.lw.ctrl_transfer(bmRequestType=0xC0, bRequest=54,
+                              wValue=int( pin | 0x10), wIndex=0,
+                              data_or_wLength=8, timeout=USB_TIMEOUT)
+	#lwStatus=usb_control_msg(lwHandle, 0xC0, 54, pin | 0x10, 0, rxBuffer, 8, USB_TIMEOUT);
+
+    def ws2812_preload(self, r, g, b):
+        self.lw.ctrl_transfer(bmRequestType=0xC0, bRequest=54,
+                              wValue=int((g<<8) | 0x20), wIndex=(int(b<<8) | r),
+                              data_or_wLength=8, timeout=USB_TIMEOUT)
+	#lwStatus=usb_control_msg(lwHandle, 0xC0, 54, (g<<8) | 0x20, (b<<8) | r, rxBuffer, 8, USB_TIMEOUT);

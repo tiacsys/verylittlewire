@@ -50,6 +50,13 @@ repos:
     rev: v2.2.2
     hooks:
       - id: codespell
+        args:
+          [
+            "-D",
+            "docs/spelling_dictionary.txt",
+            "-I",
+            "docs/spelling_ignore_wordlist.txt",
+          ]
   - repo: https://github.com/PyCQA/flake8
     rev: 5.0.4
     hooks:

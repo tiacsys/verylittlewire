@@ -44,8 +44,19 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- prettier-ignore-start -->
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
-<!-- markdownlint-enable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="http://www.li-pro.net/stephan-linz.phtml"><img src="https://avatars.githubusercontent.com/u/5664060?v=4?s=80" width="80px;" alt="Stephan Linz"/><br /><sub><b>Stephan Linz</b></sub></a><br /><a href="https://github.com/tiacsys/verylittlewire/commits?author=rexut" title="Code">💻</a> <a href="#ideas-rexut" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/tiacsys/verylittlewire/commits?author=rexut" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-end -->
 

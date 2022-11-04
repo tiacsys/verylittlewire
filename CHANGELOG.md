@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.0.3 (2022-11-04)
+### Fix
+* **ci:** No module named 'packaging' ([`0fe849c`](https://github.com/tiacsys/verylittlewire/commit/0fe849c117bf3afae65ee738f311796aa38129c6))
+
 ## v0.0.2 (2022-11-04)
 ### Fix
 * **docs:** Need type annotation for "exclude_patterns" ([`622728a`](https://github.com/tiacsys/verylittlewire/commit/622728a57e7309190fb507cb95fbac5e228aa4ba))

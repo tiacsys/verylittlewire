@@ -46,13 +46,24 @@ Ready to contribute? Here's how to set yourself up for local development.
    $ git clone git@github.com:your_name_here/verylittlewire.git
    ```
 
-3. Install the project dependencies with [Poetry](https://python-poetry.org):
+3. Create and activate a project specific [Python 3 virtual environment](https://docs.python.org/3/library/venv.html):
 
    ```shell
-   $ poetry install
+   $ python3 -m venv --prompt="$(basename $(pwd))[$(python3 --version)]" \
+                     --clear --copies .venv
+   $ source .venv/bin/activate
+
+   $ pip3 install --upgrade pip setuptools
+   $ pip3 install --upgrade poetry
    ```
 
-4. Create a branch for local development:
+4. Install the project dependencies with [Poetry](https://python-poetry.org):
+
+   ```shell
+   $ poetry install --all-extras
+   ```
+
+5. Create a branch for local development:
 
    ```shell
    $ git checkout -b name-of-your-bugfix-or-feature
@@ -60,13 +71,13 @@ Ready to contribute? Here's how to set yourself up for local development.
 
    Now you can make your changes locally.
 
-5. When you're done making changes, check that your changes pass our tests:
+6. When you're done making changes, check that your changes pass our tests:
 
    ```shell
    $ poetry run pytest
    ```
 
-6. Linting is done through [pre-commit](https://pre-commit.com). Provided you have the tool installed globally, you can run them all as one-off:
+7. Linting is done through [pre-commit](https://pre-commit.com). Provided you have the tool installed globally, you can run them all as one-off:
 
    ```shell
    $ pre-commit run -a
@@ -78,7 +89,7 @@ Ready to contribute? Here's how to set yourself up for local development.
    $ pre-commit install
    ```
 
-7. Commit your changes and push your branch to GitHub:
+8. Commit your changes and push your branch to GitHub:
 
    ```shell
    $ git add .
@@ -88,7 +99,7 @@ Ready to contribute? Here's how to set yourself up for local development.
 
    Note: the commit message should follow [the conventional commits](https://www.conventionalcommits.org). We run [`commitlint` on CI](https://github.com/marketplace/actions/commit-linter) to validate it, and if you've installed pre-commit hooks at the previous step, the message will be checked at commit time.
 
-8. Submit a pull request through the GitHub website or using the GitHub CLI (if you have it installed):
+9. Submit a pull request through the GitHub website or using the GitHub CLI (if you have it installed):
 
    ```shell
    $ gh pr create --fill

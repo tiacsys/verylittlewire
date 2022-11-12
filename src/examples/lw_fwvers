@@ -1,0 +1,26 @@
+#!/usr/bin/env python3
+
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022 Stephan Linz <linz@li-pro.net>
+
+"""
+Simple read and print out the Little Wire firmware version.
+"""
+
+from sys import stderr, stdout
+
+from verylittlewire import device as vlwd
+
+try:
+
+    # attach to the Little Wire
+    lw = vlwd.Device()
+
+    # read and print out the firmware version
+    print(lw.readFirmwareVersion(), file=stdout)
+
+except ValueError as ex:
+    print(str(ex), file=stderr)
+
+
+# vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

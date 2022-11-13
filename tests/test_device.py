@@ -73,6 +73,24 @@ class Device(unittest.TestCase):
 
     @mock.patch.object(VLWDevice, "lw")
     @mock.patch("verylittlewire.device.usb")
+    def test_serial(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: fetch serial number from USB device
+        """
+
+        device = VLWDevice()
+        serial = device.readSerialNumber()
+
+        mock_usb.util.get_string.assert_called_with(
+            device.lw, device.lw.iSerialNumber  # type: ignore[union-attr]
+        )
+
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(serial)
+        self.assertIsInstance(serial, str)
+
+    @mock.patch.object(VLWDevice, "lw")
+    @mock.patch("verylittlewire.device.usb")
     def test_fwvers(self, mock_usb, mock_lw):
         """
         UNIT TEST: fetch firmware version from USB device

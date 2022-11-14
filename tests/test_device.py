@@ -32,6 +32,9 @@ USB_TIMEOUT = 5000
 INPUT = 1
 OUTPUT = 0
 
+HIGH = 1
+LOW = 0
+
 PIN1 = 1
 PIN2 = 2
 PIN3 = 5
@@ -130,6 +133,14 @@ class Device(unittest.TestCase):
         self.assertEqual(vlwd.INPUT, INPUT)
         self.assertEqual(vlwd.OUTPUT, OUTPUT)
 
+    def test_pin_states(self):
+        """
+        UNIT TEST: provide all expected PIN states
+        """
+
+        self.assertEqual(vlwd.HIGH, HIGH)
+        self.assertEqual(vlwd.LOW, LOW)
+
     def test_pin_names(self):
         """
         UNIT TEST: provide all expected PIN names
@@ -188,6 +199,62 @@ class Device(unittest.TestCase):
             device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=14,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_digital_write_high(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: write out digital high to each known pin
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            result = device.digitalWrite(  # type: ignore[func-returns-value]
+                pin, vlwd.HIGH
+            )
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=18,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_digital_write_low(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: write out digital low to each known pin
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            result = device.digitalWrite(  # type: ignore[func-returns-value]
+                pin, vlwd.LOW
+            )
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=19,
                 wValue=pin,
                 wIndex=0,
                 data_or_wLength=8,

@@ -89,7 +89,14 @@ Ready to contribute? Here's how to set yourself up for local development.
    $ pre-commit install
    ```
 
-8. Commit your changes and push your branch to GitHub:
+8. Optional run tests on documentation and build them offline:
+
+   ```shell
+   $ make -C docs linkcheck
+   $ make -C docs html
+   ```
+
+9. Commit your changes and push your branch to GitHub:
 
    ```shell
    $ git add .
@@ -99,11 +106,11 @@ Ready to contribute? Here's how to set yourself up for local development.
 
    Note: the commit message should follow [the conventional commits](https://www.conventionalcommits.org). We run [`commitlint` on CI](https://github.com/wagoid/commitlint-github-action) to validate it, and if you've installed pre-commit hooks at the previous step, the message will be checked at commit time.
 
-9. Submit a pull request through the GitHub website or using the GitHub CLI (if you have it installed):
+10. Submit a pull request through the GitHub website or using the GitHub CLI (if you have it installed):
 
-   ```shell
-   $ gh pr create --fill
-   ```
+    ```shell
+    $ gh pr create --fill
+    ```
 
 ## Pull Request Guidelines
 

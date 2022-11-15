@@ -28,6 +28,7 @@ author = "Stephan Linz"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    "sphinx.ext.todo",
     "myst_parser",
 ]
 
@@ -41,6 +42,10 @@ templates_path = ["_templates"]
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = [""]
+
+# Enable TO-DO items and list them with a link to the original entry.
+todo_include_todos = True
+todo_link_only = True
 
 
 # -- Options for HTML output -------------------------------------------------

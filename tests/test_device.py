@@ -29,6 +29,20 @@ VENDOR_ID = 0x1781
 PRODUCT_ID = 0x0C9F
 USB_TIMEOUT = 5000
 
+INPUT = 1
+OUTPUT = 0
+
+HIGH = 1
+LOW = 0
+
+ENABLE = 1
+DISABLE = 0
+
+PIN1 = 1
+PIN2 = 2
+PIN3 = 5
+PIN4 = 0
+
 
 class Device(unittest.TestCase):
     def test_usb_vendor(self):
@@ -113,6 +127,233 @@ class Device(unittest.TestCase):
             data_or_wLength=8,
             timeout=USB_TIMEOUT,
         )
+
+    def test_pin_modes(self):
+        """
+        UNIT TEST: provide all expected PIN modes
+        """
+
+        self.assertEqual(vlwd.INPUT, INPUT)
+        self.assertEqual(vlwd.OUTPUT, OUTPUT)
+
+    def test_pin_states(self):
+        """
+        UNIT TEST: provide all expected PIN states
+        """
+
+        self.assertEqual(vlwd.HIGH, HIGH)
+        self.assertEqual(vlwd.LOW, LOW)
+
+    def test_pin_names(self):
+        """
+        UNIT TEST: provide all expected PIN names
+        """
+
+        self.assertEqual(vlwd.PIN1, PIN1)
+        self.assertEqual(vlwd.PIN2, PIN2)
+        self.assertEqual(vlwd.PIN3, PIN3)
+        self.assertEqual(vlwd.PIN4, PIN4)
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pin_mode_input(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: setup each known pin as input
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            result = device.pinMode(pin, vlwd.INPUT)  # type: ignore[func-returns-value]
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=13,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pin_mode_output(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: setup each known pin as output
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            result = device.pinMode(  # type: ignore[func-returns-value]
+                pin, vlwd.OUTPUT
+            )
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=14,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_digital_write_high(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: write out digital high to each known pin
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            result = device.digitalWrite(  # type: ignore[func-returns-value]
+                pin, vlwd.HIGH
+            )
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=18,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_digital_write_low(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: write out digital low to each known pin
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            result = device.digitalWrite(  # type: ignore[func-returns-value]
+                pin, vlwd.LOW
+            )
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=19,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_digital_read_state(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: read in current digital status from each known pin
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            status = device.digitalRead(pin)
+            self.assertIsNotNone(status)
+            self.assertIsInstance(status, int)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=20,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    def test_pullup_states(self):
+        """
+        UNIT TEST: provide all expected pull-up resistor states
+        """
+
+        self.assertEqual(vlwd.ENABLE, ENABLE)
+        self.assertEqual(vlwd.DISABLE, DISABLE)
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pullup_enable(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: enable pull-up resistor on each known pin
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            result = device.internalPullup(  # type: ignore[func-returns-value]
+                pin, vlwd.ENABLE
+            )
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=18,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pullup_disable(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: disable pull-up resistor on each known pin
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+
+            result = device.internalPullup(  # type: ignore[func-returns-value]
+                pin, vlwd.DISABLE
+            )
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=19,
+                wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
 
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

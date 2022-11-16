@@ -43,6 +43,10 @@ PIN2 = 2
 PIN3 = 5
 PIN4 = 0
 
+VREF_VCC = 0
+VREF_1100mV = 1
+VREF_2560mV = 2
+
 
 class Device(unittest.TestCase):
     def test_usb_vendor(self):
@@ -350,6 +354,41 @@ class Device(unittest.TestCase):
                 bmRequestType=0xC0,
                 bRequest=19,
                 wValue=pin,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    def test_analog_vref_levels(self):
+        """
+        UNIT TEST: provide all expected analog voltage reference levels
+        """
+
+        self.assertEqual(vlwd.VREF_VCC, VREF_VCC)
+        self.assertEqual(vlwd.VREF_1100mV, VREF_1100mV)
+        self.assertEqual(vlwd.VREF_2560mV, VREF_2560mV)
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_analog_init_levels(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: setup ADC with each known voltage reference level
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for vref in [vlwd.VREF_VCC, vlwd.VREF_1100mV, vlwd.VREF_2560mV]:
+
+            result = device.analogInit(vref)  # type: ignore[func-returns-value]
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=35,
+                wValue=((vref << 8) | 0x07),
                 wIndex=0,
                 data_or_wLength=8,
                 timeout=USB_TIMEOUT,

@@ -75,6 +75,16 @@ ADC0 = ADC_PIN3
 ADC1 = ADC_PIN2
 ADC2 = ADC_TEMP_SENS
 
+# PWM pin (channel) enumeration
+PWM_PIN4 = PIN4
+PWM_PIN1 = PIN1
+
+# PWM pin (channel) aliases
+PWMA = PWM_PIN4
+PWMB = PWM_PIN1
+PWM1 = PWMA
+PWM2 = PWMB
+
 
 class Device:
     """

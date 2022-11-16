@@ -239,5 +239,19 @@ class Device:
 
         return int(level)
 
+    def pwmInit(self) -> None:
+        """
+        Setup and initializes the PWM system.
+        """
+
+        self.lw.ctrl_transfer(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=16,
+            wValue=0,
+            wIndex=0,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

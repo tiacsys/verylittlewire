@@ -267,5 +267,19 @@ class Device:
             timeout=USB_TIMEOUT,
         )
 
+    def pwmUpdateCompare(self, channelA: int = 0, channelB: int = 0) -> None:
+        """
+        Sets the PWM compare value for both channels.
+        """
+
+        self.lw.ctrl_transfer(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=17,
+            wValue=channelA,
+            wIndex=channelB,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

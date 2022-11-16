@@ -468,5 +468,29 @@ class Device(unittest.TestCase):
         self.assertEqual(vlwd.PWM1, PIN4)
         self.assertEqual(vlwd.PWM2, PIN1)
 
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pwm_init(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: setup and initializes the PWM system
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        result = device.pwmInit()  # type: ignore[func-returns-value]
+        self.assertIsNone(result)
+
+        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=16,
+            wValue=0,
+            wIndex=0,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

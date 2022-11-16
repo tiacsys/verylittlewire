@@ -20,6 +20,33 @@
         "ideas",
         "doc"
       ]
+    },
+    {
+      "login": "adajoh99",
+      "name": "Adam Johnson",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1729678?v=4",
+      "profile": "https://github.com/adajoh99",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kehribar",
+      "name": "Ihsan Kehribar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/360652?v=4",
+      "profile": "https://soundcloud.com/ihsankehribar/sets/bits-and-pieces",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "omerk",
+      "name": "Omer Kilic",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9847?v=4",
+      "profile": "http://omer.kilic.name/",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,

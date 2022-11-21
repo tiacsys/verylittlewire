@@ -11,6 +11,10 @@ BUILDDIR      = build
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@echo
+	@echo "Add-ons:"
+	@echo "  \033[93mspelling\033[0m    to check spelling in the documentation (if enabled)"
+	@echo
 
 .PHONY: help Makefile
 

@@ -193,6 +193,16 @@ class Device:
     def readSerialNumber(self) -> str:
         """
         Returns Little Wire serial number.
+
+        Retrieve the Little Wire serial number directly from the USB device
+        descriptor. It is an direct call into the PyUSB stack by the utility
+        function to `retrive a string descriptor from the device`_.
+
+        :return: Little Wire serial number
+        :rtype: str
+
+        .. _`retrive a string descriptor from the device`:
+           https://github.com/pyusb/pyusb/blob/v1.2.1/docs/tutorial.rst#user-content-control-yourself
         """
 
         serial = usb.util.get_string(self.lw, self.lw.iSerialNumber)

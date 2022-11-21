@@ -39,6 +39,7 @@ extensions = [
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
     "sphinxcontrib.spelling",
+    "linuxdoc.rstFlatTable",
     "myst_parser",
 ]
 

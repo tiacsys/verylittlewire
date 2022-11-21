@@ -63,6 +63,22 @@ of `0x1781`_ and reflects the USB database entry for *Multiple Vendors*.
 """
 
 PRODUCT_ID: int = 0x0C9F
+"""
+USB product identifier
+
+The USB product identifier that will be used to found the Little Wire devices
+when the Little Wire object will be create and initialize by |__init__| together
+with the USB vendor identifier |VENDOR_ID|. This is an constant integer value of
+`0x0C9F`_ and reflects the USB database entry for *USBtiny*.
+
+.. _`0x0C9F`: https://devicehunt.com/view/type/usb/vendor/1781/device/0C9F
+
+.. |VENDOR_ID| replace::
+   :py:attr:`VENDOR_ID <verylittlewire.device.VENDOR_ID>`
+.. |__init__| replace::
+   :py:meth:`Device.__init__ <verylittlewire.device.Device.__init__>`
+"""
+
 USB_TIMEOUT: int = 5000
 
 # Little Wire pin modes and states

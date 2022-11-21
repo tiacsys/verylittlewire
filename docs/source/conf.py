@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = "Little Wire Python library"
-copyright = "2020, Stephan Linz"
-author = "Stephan Linz"
+copyright = "2022 TiaC Systems members and individual contributors"
+author = "TiaC Systems"
 
 
 # -- General configuration ---------------------------------------------------

@@ -71,6 +71,15 @@ spelling_word_list_filename = [os.path.abspath("../spelling_wordlist.txt")]
 spelling_show_suggestions = True
 spelling_warning = True
 
+# Fine tuning for Sphinx link checker.
+linkcheck_ignore = [r"http://localhost:\d+/"]
+linkcheck_allowed_redirects = {
+    # All HTTP redirections from the source URI to the canonical URI
+    # will be treated as "working".
+    r"https://sphinx-doc\.org/.*": r"https://sphinx-doc\.org/en/master/.*",
+    r"https://github\.com/audreyr/.*": r"https://github\.com/cookiecutter/.*",
+}
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for

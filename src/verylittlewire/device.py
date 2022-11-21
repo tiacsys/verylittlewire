@@ -246,7 +246,7 @@ class Device:
 
     def pwmInit(self) -> None:
         """
-        Setup and initializes the PWM system.
+        Setup and initialize the PWM system.
         """
 
         self.lw.ctrl_transfer(

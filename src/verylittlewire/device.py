@@ -137,6 +137,27 @@ class Device:
     """
 
     lw: usb.core.Device = None
+    """
+    Little Wire device object
+
+    This is the USB device object returned by the `PyUSB find function`_ and
+    reflects the Little Wire device that was found in association with
+    |VENDOR_ID| and |PRODUCT_ID|. This object will be created whet the |Device|
+    class will be used to create and initialize a new Very Little Wire device
+    object.
+
+    .. _`PyUSB find function`:
+       https://github.com/pyusb/pyusb/blob/v1.2.1/docs/tutorial.rst#user-content-lets-get-it-started
+
+    .. |VENDOR_ID| replace::
+       :py:attr:`VENDOR_ID <verylittlewire.device.VENDOR_ID>`
+    .. |PRODUCT_ID| replace::
+       :py:attr:`PRODUCT_ID <verylittlewire.device.PRODUCT_ID>`
+    .. |Device| replace::
+       :py:class:`Device <verylittlewire.device.Device>`
+    .. |__init__| replace::
+       :py:meth:`Device.__init__ <verylittlewire.device.Device.__init__>`
+    """
 
     def __init__(self) -> None:
         """

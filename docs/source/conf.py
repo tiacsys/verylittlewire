@@ -34,6 +34,7 @@ extensions = [
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.coverage",
     "sphinx.ext.doctest",
+    "sphinx.ext.extlinks",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
@@ -70,6 +71,28 @@ suppress_warnings = [
 spelling_word_list_filename = [os.path.abspath("../spelling_wordlist.txt")]
 spelling_show_suggestions = True
 spelling_warning = True
+
+# Setup shorten external links and emits a warning if not used.
+extlinks_detect_hardcoded_links = True
+extlinks = {
+    "lwfw11": (
+        "https://github.com/littlewire/Little-Wire/blob"
+        + "/v1.1/firmware/source/main.c#L%s",
+        "main.c:%s",
+    ),
+    "lwfw12": (
+        "https://github.com/littlewire/Little-Wire/blob/v1.2/firmware/main.c#L%s",
+        "main.c:%s",
+    ),
+    "lwcapi": (
+        "https://littlewire.github.io/documentation/%s",
+        "Little Wire API Reference (%s)",
+    ),
+    "avrdude70": (
+        "https://github.com/avrdudes/avrdude/blob/v7.0/src/usbtiny.c#L%s",
+        "usbtiny.c:%s",
+    ),
+}
 
 # Fine tuning for Sphinx link checker.
 linkcheck_ignore = [r"http://localhost:\d+/"]

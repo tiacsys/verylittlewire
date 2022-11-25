@@ -61,14 +61,14 @@ PWM_FREQ_PS0 = 1
 class Device(unittest.TestCase):
     def test_usb_vendor(self):
         """
-        UNIT TEST: use expected USB vendor identifier
+        UNIT TEST: use expected USB vendor identifyer
         """
 
         self.assertEqual(vlwd.VENDOR_ID, VENDOR_ID)
 
     def test_usb_product(self):
         """
-        UNIT TEST: use expected USB product identifier
+        UNIT TEST: use expected USB product identifyer
         """
 
         self.assertEqual(vlwd.PRODUCT_ID, PRODUCT_ID)
@@ -476,7 +476,7 @@ class Device(unittest.TestCase):
     @mock.patch("verylittlewire.device.usb")
     def test_pwm_init(self, mock_usb, mock_lw):
         """
-        UNIT TEST: setup and initialize the PWM system
+        UNIT TEST: setup and initializes the PWM system
         """
 
         device = vlwd.Device()

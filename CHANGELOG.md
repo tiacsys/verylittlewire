@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.0 (2022-11-25)
+### Feature
+* **example:** Add Little Wire LED loop back fade ([`6be490f`](https://github.com/tiacsys/verylittlewire/commit/6be490fc58f9015c1bc218467a2d9df15e18a040))
+* **example:** Add Little Wire LED fade on PIN1 ([`8bc7938`](https://github.com/tiacsys/verylittlewire/commit/8bc7938e82e81466102193470f2b984b7fff6e64))
+* Add Little Wire PWM prescaler value setup ([`a13d78c`](https://github.com/tiacsys/verylittlewire/commit/a13d78cf68f0c70c30bca5543945f928295c23ff))
+* Add Little Wire PWM compare value setup ([`ed40e74`](https://github.com/tiacsys/verylittlewire/commit/ed40e7499070e7659f5c3cd135f598a89d41f891))
+* Add Little Wire PWM system wide stop ([`793ac25`](https://github.com/tiacsys/verylittlewire/commit/793ac2545270aba2669347ff6e8851dd95dbddc7))
+* Add Little Wire PWM system wide init ([`e078a6e`](https://github.com/tiacsys/verylittlewire/commit/e078a6e99eb256bc348520be1b0a16c455475114))
+* Add Little Wire PWM pin (channel) names ([`4470935`](https://github.com/tiacsys/verylittlewire/commit/4470935b324a348bdc9335ddb8084455b326d59c))
+
 ## v0.3.0 (2022-11-25)
 ### Feature
 * **example:** Add Little Wire analog in on PIN2/3 ([`839aeee`](https://github.com/tiacsys/verylittlewire/commit/839aeeed17c62ec83aedc8199f92a337d593f8f1))

@@ -51,6 +51,12 @@ ADC_PIN3 = 0
 ADC_PIN2 = 1
 ADC_TEMP_SENS = 2
 
+PWM_FREQ_PS4 = 1024
+PWM_FREQ_PS3 = 256
+PWM_FREQ_PS2 = 64
+PWM_FREQ_PS1 = 8
+PWM_FREQ_PS0 = 1
+
 
 class Device(unittest.TestCase):
     def test_usb_vendor(self):
@@ -445,6 +451,211 @@ class Device(unittest.TestCase):
                 bmRequestType=0xC0,
                 bRequest=15,
                 wValue=channel,
+                wIndex=0,
+                data_or_wLength=8,
+                timeout=USB_TIMEOUT,
+            )
+
+    def test_pwm_pin_names(self):
+        """
+        UNIT TEST: provide all expected PWM pin (channel) names
+        """
+
+        self.assertEqual(vlwd.PWM_PIN4, PIN4)
+        self.assertEqual(vlwd.PWM_PIN1, PIN1)
+
+    def test_pwm_pin_aliases(self):
+        """
+        UNIT TEST: provide all expected PWM pin (channel) aliases
+        """
+
+        self.assertEqual(vlwd.PWMA, PIN4)
+        self.assertEqual(vlwd.PWMB, PIN1)
+        self.assertEqual(vlwd.PWM1, PIN4)
+        self.assertEqual(vlwd.PWM2, PIN1)
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pwm_init(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: setup and initializes the PWM system
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        result = device.pwmInit()  # type: ignore[func-returns-value]
+        self.assertIsNone(result)
+
+        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=16,
+            wValue=0,
+            wIndex=0,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pwm_stop(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: stop all running PWM output on both channel
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        result = device.pwmStop()  # type: ignore[func-returns-value]
+        self.assertIsNone(result)
+
+        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=32,
+            wValue=0,
+            wIndex=0,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pwm_update_compare_default(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: sets the PWM compare value to default zero for both channels
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        result = device.pwmUpdateCompare()  # type: ignore[func-returns-value]
+        self.assertIsNone(result)
+
+        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=17,
+            wValue=0,
+            wIndex=0,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pwm_update_compare_maximum(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: sets the PWM compare value to maximum for both channels
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        channelA = 2 ^ 15
+        channelB = 2 ^ 15
+        result = device.pwmUpdateCompare(  # type: ignore[func-returns-value]
+            channelA, channelB
+        )
+        self.assertIsNone(result)
+
+        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=17,
+            wValue=channelA,
+            wIndex=channelB,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
+    def test_pwm_prescaler_values(self):
+        """
+        UNIT TEST: provide all expected PWM prescaler values
+        """
+
+        self.assertEqual(vlwd.PWM_FREQ_PS4, PWM_FREQ_PS4)
+        self.assertEqual(vlwd.PWM_FREQ_PS3, PWM_FREQ_PS3)
+        self.assertEqual(vlwd.PWM_FREQ_PS2, PWM_FREQ_PS2)
+        self.assertEqual(vlwd.PWM_FREQ_PS1, PWM_FREQ_PS1)
+        self.assertEqual(vlwd.PWM_FREQ_PS0, PWM_FREQ_PS0)
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pwm_update_prescaler_default(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: sets the PWM prescaler value to default one (2⁰) for both channels
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        result = device.pwmUpdatePrescaler()  # type: ignore[func-returns-value]
+        self.assertIsNone(result)
+
+        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=22,
+            wValue=0,
+            wIndex=0,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pwm_update_prescaler_maximum(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: sets the PWM prescaler value to maximum (2¹⁵) for both channels
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        value = 2 ^ 15
+        result = device.pwmUpdatePrescaler(value)  # type: ignore[func-returns-value]
+        self.assertIsNone(result)
+
+        device.lw.ctrl_transfer.assert_not_called()  # type: ignore[union-attr]
+
+    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch("verylittlewire.device.usb")
+    def test_pwm_update_prescaler_value(self, mock_usb, mock_lw):
+        """
+        UNIT TEST: sets the PWM prescaler with each known value for both channels
+        """
+
+        device = vlwd.Device()
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, vlwd.Device)
+
+        for value in [
+            (vlwd.PWM_FREQ_PS0, 0),
+            (vlwd.PWM_FREQ_PS1, 1),
+            (vlwd.PWM_FREQ_PS2, 2),
+            (vlwd.PWM_FREQ_PS3, 3),
+            (vlwd.PWM_FREQ_PS4, 4),
+        ]:
+
+            result = device.pwmUpdatePrescaler(  # type: ignore[func-returns-value]
+                value[0]
+            )
+            self.assertIsNone(result)
+
+            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+                bmRequestType=0xC0,
+                bRequest=22,
+                wValue=value[1],
                 wIndex=0,
                 data_or_wLength=8,
                 timeout=USB_TIMEOUT,

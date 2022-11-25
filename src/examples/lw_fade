@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2022 Stephan Linz <linz@li-pro.net>
+
+"""
+Simple LED fade at Little Wire pin 1 (reverse on pin 4).
+"""
+
+import time
+from sys import stderr, stdout
+
+from verylittlewire import device as vlwd
+
+
+def cmpPWMAndWait(lw: vlwd.Device, cmpa: int, cmpb: int, ms: int = 32) -> None:
+    lw.pwmUpdateCompare(cmpa, cmpb)
+    if ms:
+        time.sleep(ms / 1000)
+
+
+try:
+
+    # attach to the Little Wire
+    lw = vlwd.Device()
+
+    print("----------------------------------------------------------", file=stdout)
+    print(
+        "> Little Wire device found with serialNumber: " + lw.readSerialNumber(),
+        file=stdout,
+    )
+    print("----------------------------------------------------------", file=stdout)
+    print("> Little Wire firmware version: " + lw.readFirmwareVersion(), file=stdout)
+
+    print("----------------------------------------------------------", file=stdout)
+    print("Setup each known pin as input for safty operations.", file=stdout)
+    for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
+        lw.pinMode(pin, vlwd.INPUT)
+
+    print("Press ctrl-c to exit.", file=stdout)
+    lw.pwmInit()
+    lw.pwmUpdatePrescaler(vlwd.PWM_FREQ_PS0)  # fastest PWM frequency
+
+    cmpa = cmpb = 0
+    cntup = True
+
+    while 1:
+        try:
+
+            if cntup and cmpb < 256 - 16:
+                cmpa -= 16
+                cmpb += 16
+
+            elif not cntup and cmpb > 0:
+                cmpa += 16
+                cmpb -= 16
+
+            elif cntup:
+                cntup = False
+
+            elif not cntup:
+                cntup = True
+
+            cmpPWMAndWait(lw, cmpa, cmpb)
+
+        except KeyboardInterrupt:
+            lw.pwmStop()
+            break
+
+except ValueError as ex:
+    print(str(ex), file=stderr)
+
+
+# vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

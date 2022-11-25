@@ -27,20 +27,14 @@ Very Little Wire device module.
 The module provides a Python interface to the Little Wire USB Multi-Tool
 developed by Ihsan Kehribar.
 
-This file is a direct Python translation of the `C/C++ library`_ developed by
-Ihsan Kehribar <ihsan@kehribar.me> and Omer Kilic <omerkilic@gmail.com>. The
-C/C++ library was released under the same license. Adam Johnson did the
-`translation based on the C/C++ library version 0.9 for Python 2`_. This new
-reimplementation is an effort to port the Python 2 translation to Python 3 and
-adapt the changes in the C/C++ library from version 0.9 to the latest version
-1.2 or higher.
+This file is a direct Python translation of the C/C++ library developed by Ihsan
+Kehribar <ihsan@kehribar.me> and Omer Kilic <omerkilic@gmail.com>. The C/C++
+library was released under the same license. Adam Johnson did the translation
+based on the C/C++ library version 0.9 for Python 2. This new reimplementation
+is an effort to port the Python 2 translation to Python 3 and adapt the changes
+in the C/C++ library from version 0.9 to the latest version 1.2.
 
 :license: MIT, see LICENSE for details.
-
-.. _`C/C++ library`:
-   https://github.com/littlewire/Little-Wire/tree/v1.2/software/library
-.. _`translation based on the C/C++ library version 0.9 for Python 2`:
-   https://github.com/adajoh99/VeryLittleWire
 """
 
 import usb

@@ -261,32 +261,5 @@ class Device(unittest.TestCase):
                 timeout=USB_TIMEOUT,
             )
 
-    @mock.patch.object(vlwd.Device, "lw")
-    @mock.patch("verylittlewire.device.usb")
-    def test_digital_read_state(self, mock_usb, mock_lw):
-        """
-        UNIT TEST: read in current digital status from each known pin
-        """
-
-        device = vlwd.Device()
-        self.assertIsNotNone(device)
-        self.assertIsNotNone(device.lw)
-        self.assertIsInstance(device, vlwd.Device)
-
-        for pin in [vlwd.PIN1, vlwd.PIN2, vlwd.PIN3, vlwd.PIN4]:
-
-            status = device.digitalRead(pin)
-            self.assertIsNotNone(status)
-            self.assertIsInstance(status, int)
-
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
-                bmRequestType=0xC0,
-                bRequest=20,
-                wValue=pin,
-                wIndex=0,
-                data_or_wLength=8,
-                timeout=USB_TIMEOUT,
-            )
-
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

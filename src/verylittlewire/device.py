@@ -191,63 +191,20 @@ Channel identification number to **ADC channel two (2), alias to ADC_TEMP_SENS**
 
 # PWM frequency prescaler value
 PWM_FREQ_PS4: int = 1024
-"""
-Prescaler value to achieve **PWM base clock divided by 1024**.
-"""
-
 PWM_FREQ_PS3: int = 256
-"""
-Prescaler value to achieve **PWM base clock divided by 256**.
-"""
-
 PWM_FREQ_PS2: int = 64
-"""
-Prescaler value to achieve **PWM base clock divided by 64**.
-"""
-
 PWM_FREQ_PS1: int = 8
-"""
-Prescaler value to achieve **PWM base clock divided by 8**.
-"""
-
 PWM_FREQ_PS0: int = 1
-"""
-Prescaler value to **hold PWM base clock**.
-"""
-
 
 # PWM pin (channel) enumeration
 PWM_PIN4: int = PIN4
-"""
-Real hardware **PWM channel index on** well known **GPIO pin four (4)**.
-"""
-
 PWM_PIN1: int = PIN1
-"""
-Real hardware **PWM channel index on** well known **GPIO pin one (1)**.
-"""
-
 
 # PWM pin (channel) aliases
 PWMA: int = PWM_PIN4
-"""
-Channel identification number to **PWM channel A, alias to PWM_PIN4**.
-"""
-
 PWMB: int = PWM_PIN1
-"""
-Channel identification number to **PWM channel B, alias to PWM_PIN1**.
-"""
-
 PWM1: int = PWMA
-"""
-Channel identification number to **PWM channel zero (0), alias to channel A**.
-"""
-
 PWM2: int = PWMB
-"""
-Channel identification number to **PWM channel one (1), alias to channel B**.
-"""
 
 
 class Device:
@@ -587,12 +544,6 @@ class Device:
     def pwmInit(self) -> None:
         """
         Setup and initialize the PWM system.
-
-        :rtype: None
-
-        :USB CTR: |UCTR_SETUP_PWM|
-
-        .. |UCTR_SETUP_PWM| replace:: :ref:`|UCTR_SETUP_PWM|`
         """
 
         self.lw.ctrl_transfer(
@@ -607,12 +558,6 @@ class Device:
     def pwmStop(self) -> None:
         """
         Stops all running PWM output on both channel.
-
-        :rtype: None
-
-        :USB CTR: |UCTR_STOP_PWM|
-
-        .. |UCTR_STOP_PWM| replace:: :ref:`|UCTR_STOP_PWM|`
         """
 
         self.lw.ctrl_transfer(
@@ -627,32 +572,6 @@ class Device:
     def pwmUpdateCompare(self, channelA: int = 0, channelB: int = 0) -> None:
         """
         Sets the PWM compare value for both channels.
-
-        Update the compare values for both PWM channels. Resolution is 8 bit.
-
-        :param channelA: Optional "channel A" compare value that have to
-                         use for the update on indirect corresponding PWM
-                         channel |PWM1| resp. |PWMA| resp. |PWM_PIN4| and
-                         can only be a value between: 0…255,
-                         **defaults to zero (0)**
-        :type channelA: int
-        :param channelB: Optional "channel B" compare value that have to
-                         use for the update on indirect corresponding PWM
-                         channel |PWM2| resp. |PWMB| resp. |PWM_PIN1| and
-                         can only be a value between: 0…255,
-                         **defaults to zero (0)**
-        :type channelB: int
-        :rtype: None
-
-        :USB CTR: |UCTR_UPDATE_PWM_COMPARE|
-
-        .. |PWM1| replace:: :py:attr:`PWM1 <verylittlewire.device.PWM1>`
-        .. |PWMA| replace:: :py:attr:`PWMA <verylittlewire.device.PWMA>`
-        .. |PWM_PIN4| replace:: :py:attr:`PWM_PIN4 <verylittlewire.device.PWM_PIN4>`
-        .. |PWM2| replace:: :py:attr:`PWM2 <verylittlewire.device.PWM2>`
-        .. |PWMB| replace:: :py:attr:`PWMB <verylittlewire.device.PWMB>`
-        .. |PWM_PIN1| replace:: :py:attr:`PWM_PIN1 <verylittlewire.device.PWM_PIN1>`
-        .. |UCTR_UPDATE_PWM_COMPARE| replace:: :ref:`|UCTR_UPDATE_PWM_COMPARE|`
         """
 
         self.lw.ctrl_transfer(
@@ -664,35 +583,9 @@ class Device:
             timeout=USB_TIMEOUT,
         )
 
-    def pwmUpdatePrescaler(self, value: int = PWM_FREQ_PS0) -> None:
+    def pwmUpdatePrescaler(self, value: int = 1) -> None:
         """
         Sets the PWM prescaler value (frequency) for both channels.
-
-        Update the prescaler of the entire PWM sub-system, therefore both
-        channels. Adjust this value according to your need for speed in PWM
-        output. Lower prescale means higher frequency on PWM all output
-        channels.
-
-        :param value: Optional prescaler "value" that have to use for all PWM
-                      channels and can only be a value of |PWM_FREQ_PS0|,
-                      |PWM_FREQ_PS1|, |PWM_FREQ_PS2|, |PWM_FREQ_PS3|, or
-                      |PWM_FREQ_PS4|, **defaults to one (1)**
-        :type value: int
-        :rtype: None
-
-        :USB CTR: |UCTR_CHANGE_PWM_PRESCALE|
-
-        .. |PWM_FREQ_PS0| replace::
-           :py:attr:`PWM_FREQ_PS0 <verylittlewire.device.PWM_FREQ_PS0>`
-        .. |PWM_FREQ_PS1| replace::
-           :py:attr:`PWM_FREQ_PS1 <verylittlewire.device.PWM_FREQ_PS1>`
-        .. |PWM_FREQ_PS2| replace::
-           :py:attr:`PWM_FREQ_PS2 <verylittlewire.device.PWM_FREQ_PS2>`
-        .. |PWM_FREQ_PS3| replace::
-           :py:attr:`PWM_FREQ_PS3 <verylittlewire.device.PWM_FREQ_PS3>`
-        .. |PWM_FREQ_PS4| replace::
-           :py:attr:`PWM_FREQ_PS4 <verylittlewire.device.PWM_FREQ_PS4>`
-        .. |UCTR_CHANGE_PWM_PRESCALE| replace:: :ref:`|UCTR_CHANGE_PWM_PRESCALE|`
         """
 
         if value == PWM_FREQ_PS4:

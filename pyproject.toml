@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "verylittlewire"
-version = "0.0.3"
+version = "0.0.4"
 description = "The Little Wire Python library provides an interface to the Little Wire USB Multi-Tool developed by Ihsan Kehribar."
 authors = ["Stephan Linz <linz@li-pro.net>"]
 license = "MIT"

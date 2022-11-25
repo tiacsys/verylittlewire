@@ -83,60 +83,20 @@ USB_TIMEOUT: int = 5000
 
 # Little Wire pin modes and states
 INPUT: int = 1
-"""
-Mode identification number to **set a GPIO pin as input**.
-"""
-
 OUTPUT: int = 0
-"""
-Mode identification number to **set a GPIO pin as output**.
-"""
-
 
 HIGH: int = 1
-"""
-State identification number to **set a GPIO pin to digital high level**.
-"""
-
 LOW: int = 0
-"""
-State identification number to **set a GPIO pin to digital low level**.
-"""
-
 
 # Little Wire internal pull-up resistor states
 ENABLE: int = 1
-"""
-State identification number to **enable internal pull-up resistor**.
-"""
-
 DISABLE: int = 0
-"""
-State identification number to **disable internal pull-up resistor**.
-"""
-
 
 # GPIO pin enumeration
 PIN1: int = 1
-"""
-Real hardware port index of well known **GPIO pin one (1)**.
-"""
-
 PIN2: int = 2
-"""
-Real hardware port index of well known **GPIO pin two (2)**.
-"""
-
 PIN3: int = 5
-"""
-Real hardware port index of well known **GPIO pin three (3)**.
-"""
-
 PIN4: int = 0
-"""
-Real hardware port index of well known **GPIO pin four (4)**.
-"""
-
 
 # ADC voltage reference level
 VREF_VCC: int = 0
@@ -281,28 +241,7 @@ class Device:
 
     def pinMode(self, pin: int, mode: int) -> None:
         """
-        Sets GPIO pin as input or output.
-
-        :param pin: Mandatory "pin" number that have to setup and can
-                    only be a well known number of:
-                    |PIN1|, |PIN2|, |PIN3|, or |PIN4|
-        :type pin: int
-        :param mode: Mandatory "mode" identifyer that have to use for
-                     the given "pin" and can only be a value of:
-                     |INPUT|, or |OUTPUT|
-        :type mode: int
-        :rtype: None
-
-        :USB CTR: |UCTR_PIN_SET_INPUT|, |UCTR_PIN_SET_OUTPUT|
-
-        .. |PIN1| replace:: :py:attr:`PIN1 <verylittlewire.device.PIN1>`
-        .. |PIN2| replace:: :py:attr:`PIN2 <verylittlewire.device.PIN2>`
-        .. |PIN3| replace:: :py:attr:`PIN3 <verylittlewire.device.PIN3>`
-        .. |PIN4| replace:: :py:attr:`PIN4 <verylittlewire.device.PIN4>`
-        .. |INPUT| replace:: :py:attr:`INPUT <verylittlewire.device.INPUT>`
-        .. |OUTPUT| replace:: :py:attr:`OUTPUT <verylittlewire.device.OUTPUT>`
-        .. |UCTR_PIN_SET_INPUT| replace:: :ref:`|UCTR_PIN_SET_INPUT|`
-        .. |UCTR_PIN_SET_OUTPUT| replace:: :ref:`|UCTR_PIN_SET_OUTPUT|`
+        Sets GPIO pins to INPUT(1) or OUTPUT(0).
         """
 
         if mode == INPUT:
@@ -326,28 +265,7 @@ class Device:
 
     def digitalWrite(self, pin: int, state: int) -> None:
         """
-        Writes a digital high or low to the selected GPIO pin.
-
-        :param pin: Mandatory "pin" number that have to write and can
-                    only be a well known number of:
-                    |PIN1|, |PIN2|, |PIN3|, or |PIN4|
-        :type pin: int
-        :param state: Mandatory "state" identifyer that have to use for
-                      the given "pin" and can only be a value of:
-                      |HIGH|, or |LOW|
-        :type state: int
-        :rtype: None
-
-        :USB CTR: |UCTR_PIN_SET_HIGH|, |UCTR_PIN_SET_LOW|
-
-        .. |PIN1| replace:: :py:attr:`PIN1 <verylittlewire.device.PIN1>`
-        .. |PIN2| replace:: :py:attr:`PIN2 <verylittlewire.device.PIN2>`
-        .. |PIN3| replace:: :py:attr:`PIN3 <verylittlewire.device.PIN3>`
-        .. |PIN4| replace:: :py:attr:`PIN4 <verylittlewire.device.PIN4>`
-        .. |HIGH| replace:: :py:attr:`HIGH <verylittlewire.device.HIGH>`
-        .. |LOW| replace:: :py:attr:`LOW <verylittlewire.device.LOW>`
-        .. |UCTR_PIN_SET_HIGH| replace:: :ref:`|UCTR_PIN_SET_HIGH|`
-        .. |UCTR_PIN_SET_LOW| replace:: :ref:`|UCTR_PIN_SET_LOW|`
+        Writes a digital HIGH (1) or LOW (0) to the selected GPIO.
         """
 
         if state == HIGH:
@@ -371,25 +289,7 @@ class Device:
 
     def digitalRead(self, pin: int) -> int:
         """
-        Returns the current digital level state of the selected GPIO.
-
-        :param pin: Mandatory "pin" number that have to read and can
-                    only be a well known number of:
-                    |PIN1|, |PIN2|, |PIN3|, or |PIN4|
-        :type pin: int
-        :return: Digital level state of given "pin" and can only be
-                 a value of: |HIGH|, or |LOW|
-        :rtype: int
-
-        :USB CTR: |UCTR_PIN_READ|
-
-        .. |PIN1| replace:: :py:attr:`PIN1 <verylittlewire.device.PIN1>`
-        .. |PIN2| replace:: :py:attr:`PIN2 <verylittlewire.device.PIN2>`
-        .. |PIN3| replace:: :py:attr:`PIN3 <verylittlewire.device.PIN3>`
-        .. |PIN4| replace:: :py:attr:`PIN4 <verylittlewire.device.PIN4>`
-        .. |HIGH| replace:: :py:attr:`HIGH <verylittlewire.device.HIGH>`
-        .. |LOW| replace:: :py:attr:`LOW <verylittlewire.device.LOW>`
-        .. |UCTR_PIN_READ| replace:: :ref:`|UCTR_PIN_READ|`
+        Returns the digital status of the selected GPIO
         """
 
         result = self.lw.ctrl_transfer(
@@ -407,31 +307,7 @@ class Device:
 
     def internalPullup(self, pin: int, state: int) -> None:
         """
-        Sets the state of the internal pull-up resistor for the selected GPIO pin.
-
-        Call this function after you assign the GPIO pin as an input. Otherwise
-        this method has no effects.
-
-        :param pin: Mandatory "pin" number that have to setup and can
-                    only be a well known number of:
-                    |PIN1|, |PIN2|, |PIN3|, or |PIN4|
-        :type pin: int
-        :param state: Mandatory "state" identifyer that have to use for
-                      the given "pin" and can only be a value of:
-                      |ENABLE|, or |DISABLE|
-        :type state: int
-        :rtype: None
-
-        :USB CTR: |UCTR_PIN_SET_HIGH|, |UCTR_PIN_SET_LOW|
-
-        .. |PIN1| replace:: :py:attr:`PIN1 <verylittlewire.device.PIN1>`
-        .. |PIN2| replace:: :py:attr:`PIN2 <verylittlewire.device.PIN2>`
-        .. |PIN3| replace:: :py:attr:`PIN3 <verylittlewire.device.PIN3>`
-        .. |PIN4| replace:: :py:attr:`PIN4 <verylittlewire.device.PIN4>`
-        .. |ENABLE| replace:: :py:attr:`ENABLE <verylittlewire.device.ENABLE>`
-        .. |DISABLE| replace:: :py:attr:`DISABLE <verylittlewire.device.DISABLE>`
-        .. |UCTR_PIN_SET_HIGH| replace:: :ref:`|UCTR_PIN_SET_HIGH|`
-        .. |UCTR_PIN_SET_LOW| replace:: :ref:`|UCTR_PIN_SET_LOW|`
+        Sets the state of the internal pull-up resistor for the selected GPIO.
         """
 
         self.digitalWrite(pin, state)

@@ -50,10 +50,6 @@ OUTPUT = 0
 HIGH = 1
 LOW = 0
 
-# Little Wire internal pull-up resistor states
-ENABLE = 1
-DISABLE = 0
-
 # GPIO pin enumeration
 PIN1 = 1
 PIN2 = 2
@@ -174,13 +170,6 @@ class Device:
         status = result.pop()
 
         return int(status)
-
-    def internalPullup(self, pin: int, state: int) -> None:
-        """
-        Sets the state of the internal pull-up resistor for the selected GPIO.
-        """
-
-        self.digitalWrite(pin, state)
 
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

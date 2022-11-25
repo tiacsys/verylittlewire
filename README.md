@@ -68,6 +68,6 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 ## Credits
 
 This package was created with
-[Cookiecutter](https://github.com/cookiecutter/cookiecutter) and the
+[Cookiecutter](https://github.com/audreyr/cookiecutter) and the
 [browniebroke/cookiecutter-pypackage](https://github.com/browniebroke/cookiecutter-pypackage)
 project template.

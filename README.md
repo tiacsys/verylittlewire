@@ -50,7 +50,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tbody>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="http://www.li-pro.net/stephan-linz.phtml"><img src="https://avatars.githubusercontent.com/u/5664060?v=4?s=80" width="80px;" alt="Stephan Linz"/><br /><sub><b>Stephan Linz</b></sub></a><br /><a href="https://github.com/tiacsys/verylittlewire/commits?author=rexut" title="Code">💻</a> <a href="#ideas-rexut" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/tiacsys/verylittlewire/commits?author=rexut" title="Documentation">📖</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/adajoh99"><img src="https://avatars.githubusercontent.com/u/1729678?v=4?s=80" width="80px;" alt="Adam Johnson"/><br /><sub><b>Adam Johnson</b></sub></a><br /><a href="https://github.com/tiacsys/verylittlewire/commits?author=adajoh99" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

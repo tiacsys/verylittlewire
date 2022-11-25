@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.3.0 (2022-11-25)
+### Feature
+* **example:** Add Little Wire analog in on PIN2/3 ([`839aeee`](https://github.com/tiacsys/verylittlewire/commit/839aeeed17c62ec83aedc8199f92a337d593f8f1))
+* Add Little Wire ADC analog read in ([`976355d`](https://github.com/tiacsys/verylittlewire/commit/976355d3edc458c38c2c691955312b1181680e87))
+* Add Little Wire ADC vref setup ([`ee84c84`](https://github.com/tiacsys/verylittlewire/commit/ee84c8437570f610aaff2e7a6b76ad11cd889b53))
+
 ## v0.2.0 (2022-11-25)
 ### Feature
 * **example:** Add Little Wire button on PIN4 ([`e82e076`](https://github.com/tiacsys/verylittlewire/commit/e82e076d6a102b6a7b27cf1e0964b356ac5b0b79))

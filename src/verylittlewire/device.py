@@ -46,22 +46,6 @@ adapt the changes in the C/C++ library from version 0.9 to the latest version
 import usb
 
 VENDOR_ID: int = 0x1781
-"""
-USB vendor identifier
-
-The USB vendor identifier that will be used to found the Little Wire devices
-when the Little Wire object will be create and initialize by |__init__| together
-with the USB product identifier |PRODUCT_ID|. This is an constant integer value
-of `0x1781`_ and reflects the USB database entry for *Multiple Vendors*.
-
-.. _`0x1781`: https://devicehunt.com/view/type/usb/vendor/1781
-
-.. |PRODUCT_ID| replace::
-   :py:attr:`PRODUCT_ID <verylittlewire.device.PRODUCT_ID>`
-.. |__init__| replace::
-   :py:meth:`Device.__init__ <verylittlewire.device.Device.__init__>`
-"""
-
 PRODUCT_ID: int = 0x0C9F
 USB_TIMEOUT: int = 5000
 

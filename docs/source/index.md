@@ -30,7 +30,6 @@ All activities on the first Python 3 transfer are only protected by rudimentary 
 
 installation
 usage
-api
 ```
 
 ```{toctree}

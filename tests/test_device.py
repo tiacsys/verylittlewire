@@ -23,7 +23,7 @@
 import unittest
 from unittest import mock
 
-from verylittlewire import device as vlwd
+from verylittlewire.device import Device as VLWDevice
 
 VENDOR_ID = 0x1781
 PRODUCT_ID = 0x0C9F
@@ -35,75 +35,69 @@ class Device(unittest.TestCase):
         """
         UNIT TEST: use expected USB vendor identifyer
         """
+        from verylittlewire.device import VENDOR_ID as DeviceVID
 
-        self.assertEqual(vlwd.VENDOR_ID, VENDOR_ID)
+        self.assertEqual(DeviceVID, VENDOR_ID)
 
     def test_usb_product(self):
         """
         UNIT TEST: use expected USB product identifyer
         """
+        from verylittlewire.device import PRODUCT_ID as DevicePID
 
-        self.assertEqual(vlwd.PRODUCT_ID, PRODUCT_ID)
+        self.assertEqual(DevicePID, PRODUCT_ID)
 
     def test_usb_timeout(self):
         """
         UNIT TEST: use expected USB timeout for communication
         """
+        from verylittlewire.device import USB_TIMEOUT as DeviceUTO
 
-        self.assertEqual(vlwd.USB_TIMEOUT, USB_TIMEOUT)
+        self.assertEqual(DeviceUTO, USB_TIMEOUT)
 
-    @mock.patch.object(vlwd.Device, "lw")
+    @mock.patch.object(VLWDevice, "lw")
     @mock.patch("verylittlewire.device.usb")
     def test_attach(self, mock_usb, mock_lw):
         """
         UNIT TEST: attach to the correct USB device
         """
 
-        device = vlwd.Device()
-
-        self.assertIsNotNone(device)
-        self.assertIsNotNone(device.lw)
-        self.assertIsInstance(device, vlwd.Device)
+        device = VLWDevice()
 
         mock_usb.core.find.assert_called_with(idVendor=VENDOR_ID, idProduct=PRODUCT_ID)
         device.lw.set_configuration.assert_called_with()  # type: ignore[union-attr]
 
-    @mock.patch.object(vlwd.Device, "lw")
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(device.lw)
+        self.assertIsInstance(device, VLWDevice)
+
+    @mock.patch.object(VLWDevice, "lw")
     @mock.patch("verylittlewire.device.usb")
     def test_serial(self, mock_usb, mock_lw):
         """
         UNIT TEST: fetch serial number from USB device
         """
 
-        device = vlwd.Device()
-        self.assertIsNotNone(device)
-        self.assertIsNotNone(device.lw)
-        self.assertIsInstance(device, vlwd.Device)
-
+        device = VLWDevice()
         serial = device.readSerialNumber()
-        self.assertIsNotNone(serial)
-        self.assertIsInstance(serial, str)
 
         mock_usb.util.get_string.assert_called_with(
             device.lw, device.lw.iSerialNumber  # type: ignore[union-attr]
         )
 
-    @mock.patch.object(vlwd.Device, "lw")
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(serial)
+        self.assertIsInstance(serial, str)
+
+    @mock.patch.object(VLWDevice, "lw")
     @mock.patch("verylittlewire.device.usb")
     def test_fwvers(self, mock_usb, mock_lw):
         """
         UNIT TEST: fetch firmware version from USB device
         """
 
-        device = vlwd.Device()
-        self.assertIsNotNone(device)
-        self.assertIsNotNone(device.lw)
-        self.assertIsInstance(device, vlwd.Device)
-
+        device = VLWDevice()
         fwvers = device.readFirmwareVersion()
-        self.assertIsNotNone(fwvers)
-        self.assertIsInstance(fwvers, str)
-        # not in unit test: self.assertEqual(fwvers, "1.3")
 
         device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
             bmRequestType=0xC0,
@@ -113,6 +107,11 @@ class Device(unittest.TestCase):
             data_or_wLength=8,
             timeout=USB_TIMEOUT,
         )
+
+        self.assertIsNotNone(device)
+        self.assertIsNotNone(fwvers)
+        self.assertIsInstance(fwvers, str)
+        # not in unit test: self.assertEqual(fwvers, "1.3")
 
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

@@ -153,23 +153,5 @@ class Device:
                 timeout=USB_TIMEOUT,
             )
 
-    def digitalRead(self, pin: int) -> int:
-        """
-        Returns the digital status of the selected GPIO
-        """
-
-        result = self.lw.ctrl_transfer(  # type: ignore[union-attr]
-            bmRequestType=0xC0,
-            bRequest=20,
-            wValue=pin,
-            wIndex=0,
-            data_or_wLength=8,
-            timeout=USB_TIMEOUT,
-        )
-
-        status = result.pop()
-
-        return int(status)
-
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

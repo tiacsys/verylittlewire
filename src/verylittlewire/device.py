@@ -140,18 +140,54 @@ Real hardware port index of well known **GPIO pin four (4)**.
 
 # ADC voltage reference level
 VREF_VCC: int = 0
+"""
+Voltage reference identification number to **VUSB = 5000mV (USB plug)**.
+"""
+
 VREF_1100mV: int = 1
+"""
+Voltage reference identification number to **internal 1100mV**.
+"""
+
 VREF_2560mV: int = 2
+"""
+Voltage reference identification number to **internal 2560mV**.
+"""
+
 
 # ADC channel enumeration
 ADC_PIN3: int = 0
+"""
+Real hardware **ADC channel index on** well known **GPIO pin three (3)**.
+"""
+
 ADC_PIN2: int = 1
+"""
+Real hardware **ADC channel index on** well known **GPIO pin two (2)**.
+"""
+
 ADC_TEMP_SENS: int = 2
+"""
+Real hardware **ADC channel index on internal temperature sensor**.
+"""
+
 
 # ADC channel aliases
 ADC0: int = ADC_PIN3
+"""
+Channel identification number to **ADC channel zero (0), alias to ADC_PIN3**.
+"""
+
 ADC1: int = ADC_PIN2
+"""
+Channel identification number to **ADC channel one (1), alias to ADC_PIN2**.
+"""
+
 ADC2: int = ADC_TEMP_SENS
+"""
+Channel identification number to **ADC channel two (2), alias to ADC_TEMP_SENS**.
+"""
+
 
 # PWM frequency prescaler value
 PWM_FREQ_PS4: int = 1024
@@ -438,7 +474,22 @@ class Device:
 
     def analogInit(self, vref: int) -> None:
         """
-        Sets voltage reference level for all ADC channel.
+        Initialize and sets voltage reference level for all ADC channels.
+
+        :param vref: Mandatory "vref" voltage reference identifyer that have
+                     to use for all ADC channel and can only be a value of:
+                     |VREF_VCC|, |VREF_1100mV|, or |VREF_2560mV|
+        :type vref: int
+        :rtype: None
+
+        :USB CTR: |UCTR_SETUP_ADC|
+
+        .. |VREF_VCC| replace:: :py:attr:`VREF_VCC <verylittlewire.device.VREF_VCC>`
+        .. |VREF_1100mV| replace::
+           :py:attr:`VREF_1100mV <verylittlewire.device.VREF_1100mV>`
+        .. |VREF_2560mV| replace::
+           :py:attr:`VREF_2560mV <verylittlewire.device.VREF_2560mV>`
+        .. |UCTR_SETUP_ADC| replace:: :ref:`|UCTR_SETUP_ADC|`
         """
 
         self.lw.ctrl_transfer(
@@ -452,7 +503,29 @@ class Device:
 
     def analogRead(self, channel: int) -> int:
         """
-        Sets voltage reference level for all ADC channel.
+        Returns the current digitized analog level of the selected ADC channel.
+
+        Analog voltage reading from |ADC0| resp. |ADC_PIN3| isn't advised
+        (it is a bit noisy) but supported. Use it at your own risk.
+
+        :param channel: Mandatory "channel" number that have to read and can
+                        only be a well known number of: |ADC0| resp. |ADC_PIN3|,
+                        |ADC1| resp. |ADC_PIN2|, or |ADC2| resp. |ADC_TEMP_SENS|
+        :type channel: int
+        :return: Digitized analog level on given "channel" and can only be
+                 a value between: 0…1024
+        :rtype: int
+
+        :USB CTR: |UCTR_READ_ADC|
+
+        .. |ADC0| replace:: :py:attr:`ADC0 <verylittlewire.device.ADC0>`
+        .. |ADC_PIN3| replace:: :py:attr:`ADC_PIN3 <verylittlewire.device.ADC_PIN3>`
+        .. |ADC1| replace:: :py:attr:`ADC1 <verylittlewire.device.ADC1>`
+        .. |ADC_PIN2| replace:: :py:attr:`ADC_PIN2 <verylittlewire.device.ADC_PIN2>`
+        .. |ADC2| replace:: :py:attr:`ADC2 <verylittlewire.device.ADC2>`
+        .. |ADC_TEMP_SENS| replace::
+           :py:attr:`ADC_TEMP_SENS <verylittlewire.device.ADC_TEMP_SENS>`
+        .. |UCTR_READ_ADC| replace:: :ref:`|UCTR_READ_ADC|`
         """
 
         result = self.lw.ctrl_transfer(

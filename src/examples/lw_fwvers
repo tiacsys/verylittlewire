@@ -16,11 +16,8 @@ try:
     # attach to the Little Wire
     lw = vlwd.Device()
 
-    # read and print out the firmware version and serial number
-    print(
-        "FW: " + lw.readFirmwareVersion() + ", S/N: " + lw.readSerialNumber(),
-        file=stdout,
-    )
+    # read and print out the firmware version
+    print(lw.readFirmwareVersion(), file=stdout)
 
 except ValueError as ex:
     print(str(ex), file=stderr)

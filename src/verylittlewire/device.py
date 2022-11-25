@@ -253,19 +253,5 @@ class Device:
             timeout=USB_TIMEOUT,
         )
 
-    def pwmStop(self) -> None:
-        """
-        Stops all running PWM output on both channel.
-        """
-
-        self.lw.ctrl_transfer(  # type: ignore[union-attr]
-            bmRequestType=0xC0,
-            bRequest=32,
-            wValue=0,
-            wIndex=0,
-            data_or_wLength=8,
-            timeout=USB_TIMEOUT,
-        )
-
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

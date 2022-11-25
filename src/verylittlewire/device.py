@@ -60,6 +60,21 @@ PIN2 = 2
 PIN3 = 5
 PIN4 = 0
 
+# ADC voltage reference level
+VREF_VCC = 0
+VREF_1100mV = 1
+VREF_2560mV = 2
+
+# ADC channel enumeration
+ADC_PIN3 = 0
+ADC_PIN2 = 1
+ADC_TEMP_SENS = 2
+
+# ADC channel aliases
+ADC0 = ADC_PIN3
+ADC1 = ADC_PIN2
+ADC2 = ADC_TEMP_SENS
+
 
 class Device:
     """
@@ -181,6 +196,38 @@ class Device:
         """
 
         self.digitalWrite(pin, state)
+
+    def analogInit(self, vref: int) -> None:
+        """
+        Sets voltage reference level for all ADC channel.
+        """
+
+        self.lw.ctrl_transfer(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=35,
+            wValue=((vref << 8) | 0x07),
+            wIndex=0,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
+    def analogRead(self, channel: int) -> int:
+        """
+        Sets voltage reference level for all ADC channel.
+        """
+
+        result = self.lw.ctrl_transfer(  # type: ignore[union-attr]
+            bmRequestType=0xC0,
+            bRequest=15,
+            wValue=channel,
+            wIndex=0,
+            data_or_wLength=8,
+            timeout=USB_TIMEOUT,
+        )
+
+        level = (result.pop() * 256) + result.pop()
+
+        return int(level)
 
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2022-11-25)
+### Feature
+* **example:** Add Little Wire button on PIN4 ([`e82e076`](https://github.com/tiacsys/verylittlewire/commit/e82e076d6a102b6a7b27cf1e0964b356ac5b0b79))
+* **example:** Add Little Wire LED loop back blink ([`f408063`](https://github.com/tiacsys/verylittlewire/commit/f40806379dc528742d00aea8d0019fe882eadaab))
+* **example:** Add Little Wire LED blink on PIN1 ([`3be20af`](https://github.com/tiacsys/verylittlewire/commit/3be20af30ea8bbc3f8cc300afec5dd2b6f6845bb))
+* Add Little Wire internal pull-up setup ([`5f88f23`](https://github.com/tiacsys/verylittlewire/commit/5f88f23bfc2d5c6fcd4589d7583c303fdfa3517b))
+* Add Little Wire GPIO digital read in ([`9233608`](https://github.com/tiacsys/verylittlewire/commit/92336085d8d4baa3deb610ffdd8e8a26c02fd49e))
+* Add Little Wire GPIO digital write out ([`11e7d03`](https://github.com/tiacsys/verylittlewire/commit/11e7d0360246ecb38035c18e6236c37b73837290))
+* Add Little Wire GPIO pin mode setup ([`d47a8f0`](https://github.com/tiacsys/verylittlewire/commit/d47a8f0b0e0247fc43cfdd0fa0e7267918e389de))
+
 ## v0.1.0 (2022-11-25)
 ### Feature
 * **example:** Add Little Wire serial number ([`3fac1f4`](https://github.com/tiacsys/verylittlewire/commit/3fac1f470299a1966acf2ff00024b22c9dee7c74))

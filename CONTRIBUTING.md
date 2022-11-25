@@ -92,9 +92,6 @@ Ready to contribute? Here's how to set yourself up for local development.
 8. Optional run tests on documentation and build them offline:
 
    ```shell
-   $ make -C docs spelling
-   $ make -C docs doctest
-   $ make -C docs coverage ; cat docs/build/coverage/python.txt
    $ make -C docs linkcheck
    $ make -C docs html
    ```

@@ -11,8 +11,18 @@ BUILDDIR      = build
 # Put it first so that "make" without argument is like "make help".
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@echo
+	@echo "Add-ons:"
+	@echo "  \033[93mspelling\033[0m    to check spelling in the documentation (if enabled)"
+	@echo
 
 .PHONY: help Makefile
+
+# Custom clean target that also removes autosummary generated files. Can
+# be removed when https://github.com/sphinx-doc/sphinx/issues/1999 is fixed.
+clean:
+	rm -rfv "$(SOURCEDIR)/_autosummary"
+	$(SPHINXBUILD)  -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

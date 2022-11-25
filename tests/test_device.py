@@ -61,14 +61,14 @@ PWM_FREQ_PS0 = 1
 class Device(unittest.TestCase):
     def test_usb_vendor(self):
         """
-        UNIT TEST: use expected USB vendor identifyer
+        UNIT TEST: use expected USB vendor identifier
         """
 
         self.assertEqual(vlwd.VENDOR_ID, VENDOR_ID)
 
     def test_usb_product(self):
         """
-        UNIT TEST: use expected USB product identifyer
+        UNIT TEST: use expected USB product identifier
         """
 
         self.assertEqual(vlwd.PRODUCT_ID, PRODUCT_ID)
@@ -94,7 +94,7 @@ class Device(unittest.TestCase):
         self.assertIsInstance(device, vlwd.Device)
 
         mock_usb.core.find.assert_called_with(idVendor=VENDOR_ID, idProduct=PRODUCT_ID)
-        device.lw.set_configuration.assert_called_with()  # type: ignore[union-attr]
+        device.lw.set_configuration.assert_called_with()
 
     @mock.patch.object(vlwd.Device, "lw")
     @mock.patch("verylittlewire.device.usb")
@@ -112,9 +112,7 @@ class Device(unittest.TestCase):
         self.assertIsNotNone(serial)
         self.assertIsInstance(serial, str)
 
-        mock_usb.util.get_string.assert_called_with(
-            device.lw, device.lw.iSerialNumber  # type: ignore[union-attr]
-        )
+        mock_usb.util.get_string.assert_called_with(device.lw, device.lw.iSerialNumber)
 
     @mock.patch.object(vlwd.Device, "lw")
     @mock.patch("verylittlewire.device.usb")
@@ -133,7 +131,7 @@ class Device(unittest.TestCase):
         self.assertIsInstance(fwvers, str)
         # not in unit test: self.assertEqual(fwvers, "1.3")
 
-        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+        device.lw.ctrl_transfer.assert_called_with(
             bmRequestType=0xC0,
             bRequest=34,
             wValue=0,
@@ -185,7 +183,7 @@ class Device(unittest.TestCase):
             result = device.pinMode(pin, vlwd.INPUT)  # type: ignore[func-returns-value]
             self.assertIsNone(result)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=13,
                 wValue=pin,
@@ -213,7 +211,7 @@ class Device(unittest.TestCase):
             )
             self.assertIsNone(result)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=14,
                 wValue=pin,
@@ -241,7 +239,7 @@ class Device(unittest.TestCase):
             )
             self.assertIsNone(result)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=18,
                 wValue=pin,
@@ -269,7 +267,7 @@ class Device(unittest.TestCase):
             )
             self.assertIsNone(result)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=19,
                 wValue=pin,
@@ -296,7 +294,7 @@ class Device(unittest.TestCase):
             self.assertIsNotNone(status)
             self.assertIsInstance(status, int)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=20,
                 wValue=pin,
@@ -332,7 +330,7 @@ class Device(unittest.TestCase):
             )
             self.assertIsNone(result)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=18,
                 wValue=pin,
@@ -360,7 +358,7 @@ class Device(unittest.TestCase):
             )
             self.assertIsNone(result)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=19,
                 wValue=pin,
@@ -395,7 +393,7 @@ class Device(unittest.TestCase):
             result = device.analogInit(vref)  # type: ignore[func-returns-value]
             self.assertIsNone(result)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=35,
                 wValue=((vref << 8) | 0x07),
@@ -447,7 +445,7 @@ class Device(unittest.TestCase):
             self.assertIsNotNone(level)
             self.assertIsInstance(level, int)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=15,
                 wValue=channel,
@@ -478,7 +476,7 @@ class Device(unittest.TestCase):
     @mock.patch("verylittlewire.device.usb")
     def test_pwm_init(self, mock_usb, mock_lw):
         """
-        UNIT TEST: setup and initializes the PWM system
+        UNIT TEST: setup and initialize the PWM system
         """
 
         device = vlwd.Device()
@@ -489,7 +487,7 @@ class Device(unittest.TestCase):
         result = device.pwmInit()  # type: ignore[func-returns-value]
         self.assertIsNone(result)
 
-        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+        device.lw.ctrl_transfer.assert_called_with(
             bmRequestType=0xC0,
             bRequest=16,
             wValue=0,
@@ -513,7 +511,7 @@ class Device(unittest.TestCase):
         result = device.pwmStop()  # type: ignore[func-returns-value]
         self.assertIsNone(result)
 
-        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+        device.lw.ctrl_transfer.assert_called_with(
             bmRequestType=0xC0,
             bRequest=32,
             wValue=0,
@@ -537,7 +535,7 @@ class Device(unittest.TestCase):
         result = device.pwmUpdateCompare()  # type: ignore[func-returns-value]
         self.assertIsNone(result)
 
-        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+        device.lw.ctrl_transfer.assert_called_with(
             bmRequestType=0xC0,
             bRequest=17,
             wValue=0,
@@ -565,7 +563,7 @@ class Device(unittest.TestCase):
         )
         self.assertIsNone(result)
 
-        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+        device.lw.ctrl_transfer.assert_called_with(
             bmRequestType=0xC0,
             bRequest=17,
             wValue=channelA,
@@ -600,7 +598,7 @@ class Device(unittest.TestCase):
         result = device.pwmUpdatePrescaler()  # type: ignore[func-returns-value]
         self.assertIsNone(result)
 
-        device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+        device.lw.ctrl_transfer.assert_called_with(
             bmRequestType=0xC0,
             bRequest=22,
             wValue=0,
@@ -625,7 +623,7 @@ class Device(unittest.TestCase):
         result = device.pwmUpdatePrescaler(value)  # type: ignore[func-returns-value]
         self.assertIsNone(result)
 
-        device.lw.ctrl_transfer.assert_not_called()  # type: ignore[union-attr]
+        device.lw.ctrl_transfer.assert_not_called()
 
     @mock.patch.object(vlwd.Device, "lw")
     @mock.patch("verylittlewire.device.usb")
@@ -652,7 +650,7 @@ class Device(unittest.TestCase):
             )
             self.assertIsNone(result)
 
-            device.lw.ctrl_transfer.assert_called_with(  # type: ignore[union-attr]
+            device.lw.ctrl_transfer.assert_called_with(
                 bmRequestType=0xC0,
                 bRequest=22,
                 wValue=value[1],

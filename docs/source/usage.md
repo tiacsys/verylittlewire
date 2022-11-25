@@ -6,18 +6,6 @@ To use this package, import it:
 import verylittlewire
 ```
 
-For example:
-
-```{testsetup} *
-import verylittlewire
-```
-
-```{doctest}
->>> import verylittlewire
->>> print(verylittlewire.__package__)
-verylittlewire
-```
-
 ```{todo} Document usage
 - how looks the architecture
 - insert API documentation

@@ -2,6 +2,40 @@
 
 <!--next-version-placeholder-->
 
+## v0.4.1 (2022-11-25)
+### Fix
+* **feat:** Typos in comment strings ([`ee572a0`](https://github.com/tiacsys/verylittlewire/commit/ee572a055005b181602f248936ea8c5e3694ba12))
+* **test:** Typos in comment strings ([`d81cb8f`](https://github.com/tiacsys/verylittlewire/commit/d81cb8f57e0ff60478dd3b341822df3ed703915a))
+* **docs:** Typos in contributing rules ([`2ef7bd2`](https://github.com/tiacsys/verylittlewire/commit/2ef7bd2d611d067629b8141286a7a22fab7d29dd))
+* **docs:** Correct link to cookiecutter ([`cece7dc`](https://github.com/tiacsys/verylittlewire/commit/cece7dc4a3bd8e6502367409c440c0df5cdbfb0c))
+* **docs:** Remove auto-generated files when clean ([`c10ed0e`](https://github.com/tiacsys/verylittlewire/commit/c10ed0e8514d6c6178a642be4d68d66dc9bd0d36))
+* **docs:** Autosummary templates for class methods ([`5698b98`](https://github.com/tiacsys/verylittlewire/commit/5698b986c97025a8baa7c98e6adde4ea26b68ea8))
+* Remove mypy ignoring union-attr check ([`de7907c`](https://github.com/tiacsys/verylittlewire/commit/de7907c1e1e404ed7ea323f2c37e71eb8dcb2776))
+
+### Documentation
+* **api:** New docstring: Little Wire PWM ([`6a3ca19`](https://github.com/tiacsys/verylittlewire/commit/6a3ca19d78ac11b7d0e103595036fd705772b3c6))
+* **api:** New docstring: Little Wire ADC ([`3c5145f`](https://github.com/tiacsys/verylittlewire/commit/3c5145fecb12f8d60c29d0b81a91e72cab5185b1))
+* **api:** New docstring: Little Wire GPIO ([`337cd2a`](https://github.com/tiacsys/verylittlewire/commit/337cd2aa06bb235098997dcd524f0cd62f9328b5))
+* **api:** New docstring: Device.readFirmwareVersion ([`29eef91`](https://github.com/tiacsys/verylittlewire/commit/29eef913581f5588b4700d108bd6684e52c55e29))
+* **api:** Add USB Control Transfer Requests ([`a4a4d5e`](https://github.com/tiacsys/verylittlewire/commit/a4a4d5e477ddeba3c1e0a366d80f6c8fa8e67150))
+* **api:** New docstring: Device.readSerialNumber ([`c8960fe`](https://github.com/tiacsys/verylittlewire/commit/c8960fefbc69372523b2f6145fbf3e99d4f2ef85))
+* **api:** New docstring: Device.__init__ ([`0035d0b`](https://github.com/tiacsys/verylittlewire/commit/0035d0b9d99d211f46b62c72fad7f016179ff8c9))
+* **api:** New docstring: Device.lw ([`b874819`](https://github.com/tiacsys/verylittlewire/commit/b874819094e5aab66ce56f94753ff270f51bbc68))
+* **api:** New docstring: PRODUCT_ID ([`d586c59`](https://github.com/tiacsys/verylittlewire/commit/d586c59f55509297eeeddb9df5026ef755113c83))
+* **api:** New docstring: VENDOR_ID ([`e589e81`](https://github.com/tiacsys/verylittlewire/commit/e589e811c141acc7eee6f1c808a687440e2960c9))
+* Precise device module description ([`b10d39f`](https://github.com/tiacsys/verylittlewire/commit/b10d39fcc43dce11d3df8be9bb9b62f9393e3f11))
+* Provide a project spelling word list ([`8f06301`](https://github.com/tiacsys/verylittlewire/commit/8f06301311b6f03c068157c586a274276577c6f0))
+* More rules to use Sphinx ([`fbe2059`](https://github.com/tiacsys/verylittlewire/commit/fbe2059aa877f9d4276ef17318b76b20b3bb2da1))
+* **api:** Add API reference with autosummary ([`dabe0bd`](https://github.com/tiacsys/verylittlewire/commit/dabe0bdf2dce78a7b476a53b14c741bc20fd6183))
+* **usage:** Add simple doctest as example ([`29a7c63`](https://github.com/tiacsys/verylittlewire/commit/29a7c63114f077d19127ea040c10e47ffc76d1c9))
+* Enable LinuxDoc flat-table ([`d0bb933`](https://github.com/tiacsys/verylittlewire/commit/d0bb9332b57936f07779d4ab9db21e163625178a))
+* Enable external links extensions ([`263503e`](https://github.com/tiacsys/verylittlewire/commit/263503effc4e627a2b51eeff665ce169cad7e30e))
+* Fine tuning for Sphinx link checker ([`d7c46f6`](https://github.com/tiacsys/verylittlewire/commit/d7c46f67e882c864f5f4dd67c92f524ca2adc5d9))
+* Enable spell checker ([`6a13be1`](https://github.com/tiacsys/verylittlewire/commit/6a13be1df59fc3ecabc222ab8f6bc88eee00670f))
+* Enable auto-documentation extensions ([`26b6e30`](https://github.com/tiacsys/verylittlewire/commit/26b6e30a028d424a4a016f2f33d1ea73aed99f79))
+* Enable auto-section labeling extension ([`277cb91`](https://github.com/tiacsys/verylittlewire/commit/277cb9144d4f977b040b6fe383d2f7b2f6dd2eed))
+* Change copyright to TiaC Systems ([`7bd4833`](https://github.com/tiacsys/verylittlewire/commit/7bd4833f5f42d1e3bcf615bfee7cf9c27b467cc2))
+
 ## v0.4.0 (2022-11-25)
 ### Feature
 * **example:** Add Little Wire LED loop back fade ([`6be490f`](https://github.com/tiacsys/verylittlewire/commit/6be490fc58f9015c1bc218467a2d9df15e18a040))

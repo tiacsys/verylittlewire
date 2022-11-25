@@ -39,58 +39,58 @@ in the C/C++ library from version 0.9 to the latest version 1.2.
 
 import usb
 
-VENDOR_ID: int = 0x1781
-PRODUCT_ID: int = 0x0C9F
-USB_TIMEOUT: int = 5000
+VENDOR_ID = 0x1781
+PRODUCT_ID = 0x0C9F
+USB_TIMEOUT = 5000
 
 # Little Wire pin modes and states
-INPUT: int = 1
-OUTPUT: int = 0
+INPUT = 1
+OUTPUT = 0
 
-HIGH: int = 1
-LOW: int = 0
+HIGH = 1
+LOW = 0
 
 # Little Wire internal pull-up resistor states
-ENABLE: int = 1
-DISABLE: int = 0
+ENABLE = 1
+DISABLE = 0
 
 # GPIO pin enumeration
-PIN1: int = 1
-PIN2: int = 2
-PIN3: int = 5
-PIN4: int = 0
+PIN1 = 1
+PIN2 = 2
+PIN3 = 5
+PIN4 = 0
 
 # ADC voltage reference level
-VREF_VCC: int = 0
-VREF_1100mV: int = 1
-VREF_2560mV: int = 2
+VREF_VCC = 0
+VREF_1100mV = 1
+VREF_2560mV = 2
 
 # ADC channel enumeration
-ADC_PIN3: int = 0
-ADC_PIN2: int = 1
-ADC_TEMP_SENS: int = 2
+ADC_PIN3 = 0
+ADC_PIN2 = 1
+ADC_TEMP_SENS = 2
 
 # ADC channel aliases
-ADC0: int = ADC_PIN3
-ADC1: int = ADC_PIN2
-ADC2: int = ADC_TEMP_SENS
+ADC0 = ADC_PIN3
+ADC1 = ADC_PIN2
+ADC2 = ADC_TEMP_SENS
 
 # PWM frequency prescaler value
-PWM_FREQ_PS4: int = 1024
-PWM_FREQ_PS3: int = 256
-PWM_FREQ_PS2: int = 64
-PWM_FREQ_PS1: int = 8
-PWM_FREQ_PS0: int = 1
+PWM_FREQ_PS4 = 1024
+PWM_FREQ_PS3 = 256
+PWM_FREQ_PS2 = 64
+PWM_FREQ_PS1 = 8
+PWM_FREQ_PS0 = 1
 
 # PWM pin (channel) enumeration
-PWM_PIN4: int = PIN4
-PWM_PIN1: int = PIN1
+PWM_PIN4 = PIN4
+PWM_PIN1 = PIN1
 
 # PWM pin (channel) aliases
-PWMA: int = PWM_PIN4
-PWMB: int = PWM_PIN1
-PWM1: int = PWMA
-PWM2: int = PWMB
+PWMA = PWM_PIN4
+PWMB = PWM_PIN1
+PWM1 = PWMA
+PWM2 = PWMB
 
 
 class Device:
@@ -98,7 +98,7 @@ class Device:
     Class to control a LittleWire USB Multi-Tool.
     """
 
-    lw: usb.core.Device = None
+    lw = None
 
     def __init__(self) -> None:
         """
@@ -117,7 +117,9 @@ class Device:
         Returns Little Wire serial number.
         """
 
-        serial = usb.util.get_string(self.lw, self.lw.iSerialNumber)
+        serial = usb.util.get_string(
+            self.lw, self.lw.iSerialNumber  # type: ignore[union-attr]
+        )
 
         return str(serial)
 
@@ -126,7 +128,7 @@ class Device:
         Returns Little Wire firmware version.
         """
 
-        result = self.lw.ctrl_transfer(
+        result = self.lw.ctrl_transfer(  # type: ignore[union-attr]
             bmRequestType=0xC0,
             bRequest=34,
             wValue=0,
@@ -145,7 +147,7 @@ class Device:
         """
 
         if mode == INPUT:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=13,
                 wValue=pin,
@@ -154,7 +156,7 @@ class Device:
                 timeout=USB_TIMEOUT,
             )
         else:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=14,
                 wValue=pin,
@@ -169,7 +171,7 @@ class Device:
         """
 
         if state == HIGH:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=18,
                 wValue=pin,
@@ -178,7 +180,7 @@ class Device:
                 timeout=USB_TIMEOUT,
             )
         else:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=19,
                 wValue=pin,
@@ -192,7 +194,7 @@ class Device:
         Returns the digital status of the selected GPIO
         """
 
-        result = self.lw.ctrl_transfer(
+        result = self.lw.ctrl_transfer(  # type: ignore[union-attr]
             bmRequestType=0xC0,
             bRequest=20,
             wValue=pin,
@@ -217,7 +219,7 @@ class Device:
         Sets voltage reference level for all ADC channel.
         """
 
-        self.lw.ctrl_transfer(
+        self.lw.ctrl_transfer(  # type: ignore[union-attr]
             bmRequestType=0xC0,
             bRequest=35,
             wValue=((vref << 8) | 0x07),
@@ -231,7 +233,7 @@ class Device:
         Sets voltage reference level for all ADC channel.
         """
 
-        result = self.lw.ctrl_transfer(
+        result = self.lw.ctrl_transfer(  # type: ignore[union-attr]
             bmRequestType=0xC0,
             bRequest=15,
             wValue=channel,
@@ -249,7 +251,7 @@ class Device:
         Setup and initializes the PWM system.
         """
 
-        self.lw.ctrl_transfer(
+        self.lw.ctrl_transfer(  # type: ignore[union-attr]
             bmRequestType=0xC0,
             bRequest=16,
             wValue=0,
@@ -263,7 +265,7 @@ class Device:
         Stops all running PWM output on both channel.
         """
 
-        self.lw.ctrl_transfer(
+        self.lw.ctrl_transfer(  # type: ignore[union-attr]
             bmRequestType=0xC0,
             bRequest=32,
             wValue=0,
@@ -277,7 +279,7 @@ class Device:
         Sets the PWM compare value for both channels.
         """
 
-        self.lw.ctrl_transfer(
+        self.lw.ctrl_transfer(  # type: ignore[union-attr]
             bmRequestType=0xC0,
             bRequest=17,
             wValue=channelA,
@@ -292,7 +294,7 @@ class Device:
         """
 
         if value == PWM_FREQ_PS4:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=22,
                 wValue=4,
@@ -301,7 +303,7 @@ class Device:
                 timeout=USB_TIMEOUT,
             )
         elif value == PWM_FREQ_PS3:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=22,
                 wValue=3,
@@ -310,7 +312,7 @@ class Device:
                 timeout=USB_TIMEOUT,
             )
         elif value == PWM_FREQ_PS2:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=22,
                 wValue=2,
@@ -319,7 +321,7 @@ class Device:
                 timeout=USB_TIMEOUT,
             )
         elif value == PWM_FREQ_PS1:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=22,
                 wValue=1,
@@ -328,7 +330,7 @@ class Device:
                 timeout=USB_TIMEOUT,
             )
         elif value == PWM_FREQ_PS0:
-            self.lw.ctrl_transfer(
+            self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=22,
                 wValue=0,

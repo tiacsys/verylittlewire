@@ -162,25 +162,6 @@ class Device:
     def __init__(self) -> None:
         """
         Finds the first Little Wire device and attaches to it.
-
-        With the help of the `PyUSB find function`_ and the constant values
-        |VENDOR_ID| and |PRODUCT_ID| the first detectable Little Wire device
-        is stored as USB device object in |lw|. If no Little Wire device can
-        be found on the USB bus, the object instantiation will be aborted with
-        the exception `ValueError`.
-
-        :raises ValueError: Little Wire device can not found on USB bus.
-        :rtype: None
-
-        .. _`PyUSB find function`:
-           https://github.com/pyusb/pyusb/blob/v1.2.1/docs/tutorial.rst#user-content-lets-get-it-started
-
-        .. |VENDOR_ID| replace::
-           :py:attr:`VENDOR_ID <verylittlewire.device.VENDOR_ID>`
-        .. |PRODUCT_ID| replace::
-           :py:attr:`PRODUCT_ID <verylittlewire.device.PRODUCT_ID>`
-        .. |lw| replace::
-           :py:attr:`Device.lw <verylittlewire.device.Device.lw>`
         """
 
         self.lw = usb.core.find(idVendor=VENDOR_ID, idProduct=PRODUCT_ID)

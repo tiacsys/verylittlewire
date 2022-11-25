@@ -212,6 +212,18 @@ class Device:
     def readFirmwareVersion(self) -> str:
         """
         Returns Little Wire firmware version.
+
+        Retrieve the firmware version number from the Little Wire USB device
+        in following format:
+
+        :code:`0xXY` => **X**: major version, **Y**: minor version
+
+        :return: Little Wire firmware version number
+        :rtype: str
+
+        :USB CTR: |UCTR_VERSION_QUERY|
+
+        .. |UCTR_VERSION_QUERY| replace:: :ref:`|UCTR_VERSION_QUERY|`
         """
 
         result = self.lw.ctrl_transfer(

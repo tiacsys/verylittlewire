@@ -450,23 +450,5 @@ class Device(unittest.TestCase):
                 timeout=USB_TIMEOUT,
             )
 
-    def test_pwm_pin_names(self):
-        """
-        UNIT TEST: provide all expected PWM pin (channel) names
-        """
-
-        self.assertEqual(vlwd.PWM_PIN4, PIN4)
-        self.assertEqual(vlwd.PWM_PIN1, PIN1)
-
-    def test_pwm_pin_aliases(self):
-        """
-        UNIT TEST: provide all expected PWM pin (channel) aliases
-        """
-
-        self.assertEqual(vlwd.PWMA, PIN4)
-        self.assertEqual(vlwd.PWMB, PIN1)
-        self.assertEqual(vlwd.PWM1, PIN4)
-        self.assertEqual(vlwd.PWM2, PIN1)
-
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

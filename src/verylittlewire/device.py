@@ -63,17 +63,6 @@ class Device:
 
         self.lw.set_configuration()
 
-    def readSerialNumber(self) -> str:
-        """
-        Returns Little Wire serial number.
-        """
-
-        serial = usb.util.get_string(
-            self.lw, self.lw.iSerialNumber  # type: ignore[union-attr]
-        )
-
-        return str(serial)
-
     def readFirmwareVersion(self) -> str:
         """
         Returns Little Wire firmware version.

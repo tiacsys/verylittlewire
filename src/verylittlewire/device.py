@@ -75,13 +75,6 @@ ADC0 = ADC_PIN3
 ADC1 = ADC_PIN2
 ADC2 = ADC_TEMP_SENS
 
-# PWM frequency prescaler value
-PWM_FREQ_PS4 = 1024
-PWM_FREQ_PS3 = 256
-PWM_FREQ_PS2 = 64
-PWM_FREQ_PS1 = 8
-PWM_FREQ_PS0 = 1
-
 # PWM pin (channel) enumeration
 PWM_PIN4 = PIN4
 PWM_PIN1 = PIN1
@@ -287,57 +280,6 @@ class Device:
             data_or_wLength=8,
             timeout=USB_TIMEOUT,
         )
-
-    def pwmUpdatePrescaler(self, value: int = 1) -> None:
-        """
-        Sets the PWM prescaler value (frequency) for both channels.
-        """
-
-        if value == PWM_FREQ_PS4:
-            self.lw.ctrl_transfer(  # type: ignore[union-attr]
-                bmRequestType=0xC0,
-                bRequest=22,
-                wValue=4,
-                wIndex=0,
-                data_or_wLength=8,
-                timeout=USB_TIMEOUT,
-            )
-        elif value == PWM_FREQ_PS3:
-            self.lw.ctrl_transfer(  # type: ignore[union-attr]
-                bmRequestType=0xC0,
-                bRequest=22,
-                wValue=3,
-                wIndex=0,
-                data_or_wLength=8,
-                timeout=USB_TIMEOUT,
-            )
-        elif value == PWM_FREQ_PS2:
-            self.lw.ctrl_transfer(  # type: ignore[union-attr]
-                bmRequestType=0xC0,
-                bRequest=22,
-                wValue=2,
-                wIndex=0,
-                data_or_wLength=8,
-                timeout=USB_TIMEOUT,
-            )
-        elif value == PWM_FREQ_PS1:
-            self.lw.ctrl_transfer(  # type: ignore[union-attr]
-                bmRequestType=0xC0,
-                bRequest=22,
-                wValue=1,
-                wIndex=0,
-                data_or_wLength=8,
-                timeout=USB_TIMEOUT,
-            )
-        elif value == PWM_FREQ_PS0:
-            self.lw.ctrl_transfer(  # type: ignore[union-attr]
-                bmRequestType=0xC0,
-                bRequest=22,
-                wValue=0,
-                wIndex=0,
-                data_or_wLength=8,
-                timeout=USB_TIMEOUT,
-            )
 
 
 # vim: tw=80 ts=4 sw=4 sts=4 sta et ai nu

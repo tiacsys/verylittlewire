@@ -43,12 +43,9 @@ VENDOR_ID = 0x1781
 PRODUCT_ID = 0x0C9F
 USB_TIMEOUT = 5000
 
-# Little Wire pin modes and states
+# Little Wire pin modes
 INPUT = 1
 OUTPUT = 0
-
-HIGH = 1
-LOW = 0
 
 # GPIO pin enumeration
 PIN1 = 1
@@ -123,30 +120,6 @@ class Device:
             self.lw.ctrl_transfer(  # type: ignore[union-attr]
                 bmRequestType=0xC0,
                 bRequest=14,
-                wValue=pin,
-                wIndex=0,
-                data_or_wLength=8,
-                timeout=USB_TIMEOUT,
-            )
-
-    def digitalWrite(self, pin: int, state: int) -> None:
-        """
-        Writes a digital HIGH (1) or LOW (0) to the selected GPIO.
-        """
-
-        if state == HIGH:
-            self.lw.ctrl_transfer(  # type: ignore[union-attr]
-                bmRequestType=0xC0,
-                bRequest=18,
-                wValue=pin,
-                wIndex=0,
-                data_or_wLength=8,
-                timeout=USB_TIMEOUT,
-            )
-        else:
-            self.lw.ctrl_transfer(  # type: ignore[union-attr]
-                bmRequestType=0xC0,
-                bRequest=19,
                 wValue=pin,
                 wIndex=0,
                 data_or_wLength=8,
